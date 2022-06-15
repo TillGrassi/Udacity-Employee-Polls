@@ -6,7 +6,7 @@ import { setAuthedUser } from "./authedUser";
 export function handleInitialData() {
   return (dispatch) => {
     return Promise.all([_getUsers(), _getQuestions()]).then(
-      ({ users, questions }) => {
+      ([users, questions]) => {
         dispatch(receiveUsers(users));
         dispatch(receiveQuestions(questions));
         dispatch(setAuthedUser());
