@@ -1,34 +1,65 @@
 import { connect } from "react-redux";
 import { useState } from "react";
+import { setAuthedUser } from "../actions/authedUser";
+import sarahedo from "../avatar/avatar1.jpg";
+import tylermcginnis from "../avatar/avatar2.jpg";
+import mtsamis from "../avatar/avatar3.jpg";
+import zoshikanlu from "../avatar/avatar4.jpg";
 
-const Login = ({ users }) => {
+const Login = ({ users, dispatch }) => {
   const [userPicked, setUserPicked] = useState("none");
-  console.log(users);
+  const handleLogIn = (e) => {
+    e.preventDefault();
 
-  function handleChange() {}
+    dispatch(setAuthedUser(userPicked));
+  };
 
   return (
-    <div>
+    <form className="LogIn">
       <h1>Select the user:</h1>
+      {userPicked === "sarahedo" && <img src={sarahedo} />}
+      {userPicked === "tylermcginnis" && <img src={tylermcginnis} />}
+      {userPicked === "mtsamis" && <img src={mtsamis} />}
+      {userPicked === "zoshikanlu" && <img src={zoshikanlu} />}
       <select
-        onChange={handleChange}
-        value={(e) => setUserPicked(e.target.value)}
+        className="LoginForm"
+        onChange={(e) => setUserPicked(e.target.value)}
+        value={userPicked}
       >
-        <option value="none">Select...</option>
+        <option value="none" disabled>
+          Select...
+        </option>
         {users.map((user) => (
-          <option value={user.id}>
-            <img src={user.avatar} />
+          <option key={user.id} value={user.id}>
             {user.name}
           </option>
         ))}
       </select>
-    </div>
+      <input
+        type="password"
+        placeholder="password"
+        className="LoginForm"
+        required
+      />
+      {userPicked === "none" ? (
+        <button disabled className="LoginForm">
+          Submit
+        </button>
+      ) : (
+        <button onClick={handleLogIn} className="LoginForm">
+          Submit
+        </button>
+      )}
+    </form>
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return { users: state.users };
+const mapStateToProps = ({ users }) => {
+  return {
+    users: Object.keys(users).map(function (key) {
+      return users[key];
+    }),
+  };
 };
 
 export default connect(mapStateToProps)(Login);
