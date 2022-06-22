@@ -8,34 +8,33 @@ function Dashboard({ authedUser, questions }) {
   const [newQuestions, setNewQuestions] = useState([]);
 
   useEffect(() => {
-    console.log(
-      questions.filter((q) => q.optionOne.votes.includes("sarahedo"))
-    );
     setDoneQuestions(
       Object.values(questions)
         .filter(
           (q) =>
-            q.optionOne.votes.includes("sarahedo") ||
-            q.optionTwo.votes.includes("sarahedo")
+            q.optionOne.votes.includes(authedUser.id) ||
+            q.optionTwo.votes.includes(authedUser.id)
         )
         .sort((a, b) => b.timestamp - a.timestamp)
     );
-    console.log("doneQuestions: ", doneQuestions);
-    /* setNewQuestions(
-      questions
+    setNewQuestions(
+      Object.values(questions)
         .filter(
           (q) =>
-            !q.optionOne.votes.includes(authedUser) ||
-            !q.optionTwo.votes.includes(authedUser)
+            !q.optionOne.votes.includes(authedUser.id) &&
+            !q.optionTwo.votes.includes(authedUser.id)
         )
         .sort((a, b) => b.timestamp - a.timestamp)
-    );*/
-  }, []);
+    );
+  }, [questions.length, authedUser]);
 
   return (
     <div>
       <NavBar />
-      <PollContainer />
+      <PollContainer
+        newQuestions={newQuestions}
+        doneQuestions={doneQuestions}
+      />
     </div>
   );
 }

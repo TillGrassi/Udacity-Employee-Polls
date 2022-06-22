@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { useState } from "react";
 import { setAuthedUser } from "../actions/authedUser";
+import { useNavigate } from "react-router-dom";
 import sarahedo from "../avatar/avatar1.jpg";
 import tylermcginnis from "../avatar/avatar2.jpg";
 import mtsamis from "../avatar/avatar3.jpg";
@@ -8,10 +9,12 @@ import zoshikanlu from "../avatar/avatar4.jpg";
 
 const Login = ({ users, dispatch }) => {
   const [userPicked, setUserPicked] = useState("none");
+  const navigate = useNavigate();
   const handleLogIn = (e) => {
     e.preventDefault();
 
     dispatch(setAuthedUser(userPicked));
+    navigate("/");
   };
 
   return (

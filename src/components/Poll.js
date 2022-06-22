@@ -1,10 +1,22 @@
-function Poll(props) {
+import { Link } from "react-router-dom";
+
+function Poll({ question }) {
+  const humanDateFormat = () => {
+    const dateObj = new Date(question.timestamp);
+    return dateObj.toLocaleString([], {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
-    <div className="Poll">
-      <p>User</p>
-      <p>Zeit/Datum</p>
-      <button>Show</button>
-    </div>
+    <Link to={`/Poll/${question.id}`} state={question} className="Poll Link">
+      <h3>{question.author}</h3>
+      <p>{humanDateFormat()}</p>
+    </Link>
   );
 }
 export default Poll;

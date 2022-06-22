@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.Link {
+  text-decoration: inherit;
+  color: inherit;
+}
+
 /* LogIn */
 .LogIn {
   display: flex;
@@ -27,7 +32,12 @@
 
 .NavLink {
   display: block;
+  cursor: pointer;
   padding: 8px;
+}
+
+.NavLink:hover {
+  background-color: aquamarine;
 }
 
 .NavLeft {
@@ -64,6 +74,11 @@ h4 {
   margin: 5px;
   padding: 2px;
   border: 2px solid black;
+  cursor: pointer;
+}
+
+.Poll:hover {
+  background-color: aquamarine;
 }
 
 .PollsFlex {
@@ -72,4 +87,41 @@ h4 {
 
 p {
   margin: 5px;
+}
+
+/* Leaderboard */
+
+.Table {
+  border: 2px solid black;
+  margin: 5px auto 5px auto;
+  width: 80%;
+  cursor: default;
+}
+
+thead {
+  background-color: lightgray;
+}
+
+tbody tr:hover {
+  background-color: aquamarine;
+}
+
+/* New Poll Form */
+
+.NewOption {
+  height: 30px;
+  width: 200px;
+  margin: 10px 30px 10px 30px;
+}
+
+/* Pollview */
+
+.PollviewList {
+  display: flex;
+  list-style-type: none;
+}
+
+.PollviewOptions {
+  border: 2px solid black;
+  margin: 20px;
 }

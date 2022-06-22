@@ -6,12 +6,23 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
 import middleware from "./middleware";
+import { BrowserRouter } from "react-router-dom";
+import { saveState, loadState } from "./saveState";
 
-const store = createStore(reducer, middleware);
+const persistedState = loadState();
+const store = createStore(reducer, persistedState, middleware);
+
+store.subscribe(() => {
+  saveState({
+    authedUser: store.getState().authedUser,
+  });
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>
 );

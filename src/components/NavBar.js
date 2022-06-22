@@ -1,24 +1,37 @@
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { setAuthedUser } from "../actions/authedUser";
 import sarahedo from "../avatar/avatar1.jpg";
 import tylermcginnis from "../avatar/avatar2.jpg";
 import mtsamis from "../avatar/avatar3.jpg";
 import zoshikanlu from "../avatar/avatar4.jpg";
 
 function NavBar({ authedUser }) {
-  console.log("navbar user", authedUser);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(setAuthedUser("none"));
+  };
   return (
     <ul className="Navbar">
       <li className="NavLeft">
-        <a className="NavLink">Home</a>
+        <Link to="/" className="NavLink Link">
+          Home
+        </Link>
       </li>
       <li className="NavLeft">
-        <a className="NavLink">LeaderBoard</a>
+        <Link to="/Leaderboard" className="NavLink Link">
+          LeaderBoard
+        </Link>
       </li>
       <li className="NavLeft">
-        <a className="NavLink">New</a>
+        <Link to="/NewPoll" className="NavLink Link">
+          New
+        </Link>
       </li>
       <li className="NavRight">
-        <a className="NavLink">Logout</a>
+        <a onClick={handleLogout} className="NavLink">
+          Logout
+        </a>
       </li>
       <li className="NavRight NavLink">{authedUser.id}</li>
       <li className="NavRight">
@@ -40,7 +53,6 @@ function NavBar({ authedUser }) {
 }
 
 const mapStateToProps = ({ authedUser }) => {
-  console.log(authedUser);
   return {
     authedUser,
   };
