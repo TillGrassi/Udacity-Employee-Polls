@@ -13,7 +13,7 @@ function Poll({ question }) {
   };
 
   return (
-    <Link to={`/Poll/${question.id}`} state={question} className="Poll Link">
+    <Link to={`/Poll/${question.id}`} className="Poll Link">
       <h3>{question.author}</h3>
       <p>{humanDateFormat()}</p>
     </Link>

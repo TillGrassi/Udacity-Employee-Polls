@@ -12,7 +12,7 @@ function Pollpage({ questions }) {
   return (
     <div>
       <NavBar />
-      <Pollview question={questionDataObj} />
+      {questionDataObj && <Pollview question={questionDataObj} />}
     </div>
   );
 }

@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { handleInitialData } from "./actions/shared";
 import { Routes, Route } from "react-router-dom";
+import NotFound from "./components/NotFound";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -17,14 +18,15 @@ function App(props) {
 
   return (
     <div className="App">
-      {props.authedUser === null ? (
+      {props.authedUser.id === null ? (
         <LogIn />
       ) : (
         <Routes>
           <Route path="/" exact element={<Dashboard />} />
           <Route path="/Leaderboard" element={<Leaderboard />} />
           <Route path="/NewPoll" element={<NewPoll />} />
-          <Route path="/Poll/:id" element={<Pollpage />} />
+          <Route path="/Poll/:id" exact element={<Pollpage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       )}
     </div>

@@ -1,9 +1,54 @@
+import { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { handleSaveQuestionAnswer } from "../actions/questions";
 import sarahedo from "../avatar/avatar1.jpg";
 import tylermcginnis from "../avatar/avatar2.jpg";
 import mtsamis from "../avatar/avatar3.jpg";
 import zoshikanlu from "../avatar/avatar4.jpg";
 
-function Pollview({ question }) {
+function Pollview({ question, authedUser }) {
+  const [chosenOption, setChosenOption] = useState({
+    optionOne: "none",
+    optionTwo: "none",
+  });
+
+  const percentageOne = () => {
+    return (
+      (question.optionOne.votes.length /
+        (question.optionOne.votes.length + question.optionTwo.votes.length)) *
+      100
+    ).toFixed(2);
+  };
+  const percentageTwo = () => {
+    return (
+      (question.optionTwo.votes.length /
+        (question.optionOne.votes.length + question.optionTwo.votes.length)) *
+      100
+    ).toFixed(2);
+  };
+
+  const answerOne = {
+    authedUser: authedUser.id,
+    qid: question.id,
+    answer: "optionOne",
+  };
+  const saveAnswerOne = () => {
+    handleSaveQuestionAnswer(answerOne);
+  };
+
+  const saveAnswerTwo = () => {
+    handleSaveQuestionAnswer(authedUser.id, question.id, "optionTwo");
+  };
+
+  useEffect(() => {
+    if (question.optionOne.votes.includes(authedUser.id)) {
+      setChosenOption({ optionOne: "chosen" });
+    }
+    if (question.optionTwo.votes.includes(authedUser.id)) {
+      setChosenOption({ optionTwo: "chosen" });
+    }
+  }, []);
+
   return (
     <div>
       <h3>Poll by:</h3>
@@ -14,16 +59,57 @@ function Pollview({ question }) {
       <p>{question.author}</p>
       <h3>Would you rather</h3>
       <ul className="PollviewList">
-        <li className="PollviewOptions">
+        <li className={`PollviewOptions ${chosenOption.optionOne}`}>
           {question.optionOne.text}
-          <button>Choose</button>
+          {chosenOption.optionOne === "chosen" ||
+          chosenOption.optionTwo === "chosen" ? (
+            <>
+              <p>Answers: {question.optionOne.votes.length}</p>
+              <div className="Progress">
+                <div
+                  className="ProgressBar"
+                  style={{ width: `${percentageOne()}%` }}
+                >
+                  {percentageOne()}%
+                </div>
+              </div>
+            </>
+          ) : (
+            <button className="PollviewButton" onClick={saveAnswerOne}>
+              Choose
+            </button>
+          )}
         </li>
-        <li className="PollviewOptions">
+        <li className={`PollviewOptions ${chosenOption.optionTwo}`}>
           {question.optionTwo.text}
-          <button>Choose</button>
+          {chosenOption.optionOne === "chosen" ||
+          chosenOption.optionTwo === "chosen" ? (
+            <>
+              <p>Answers: {question.optionTwo.votes.length}</p>
+              <div className="Progress">
+                <div
+                  className="ProgressBar"
+                  style={{ width: `${percentageTwo()}%` }}
+                >
+                  {percentageTwo()}%
+                </div>
+              </div>
+            </>
+          ) : (
+            <button className="PollviewButton" onClick={saveAnswerTwo}>
+              Choose
+            </button>
+          )}
         </li>
       </ul>
     </div>
   );
 }
-export default Pollview;
+
+const mapStateToProps = ({ authedUser }) => {
+  return {
+    authedUser,
+  };
+};
+
+export default connect(mapStateToProps)(Pollview);

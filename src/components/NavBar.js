@@ -1,6 +1,6 @@
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { setAuthedUser } from "../actions/authedUser";
+import { removeAuthedUser } from "../actions/authedUser";
 import sarahedo from "../avatar/avatar1.jpg";
 import tylermcginnis from "../avatar/avatar2.jpg";
 import mtsamis from "../avatar/avatar3.jpg";
@@ -9,7 +9,7 @@ import zoshikanlu from "../avatar/avatar4.jpg";
 function NavBar({ authedUser }) {
   const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch(setAuthedUser("none"));
+    dispatch(removeAuthedUser());
   };
   return (
     <ul className="Navbar">
