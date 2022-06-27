@@ -1,11 +1,30 @@
 import NavBar from "./NavBar";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import sarahedo from "../avatar/avatar1.jpg";
 import tylermcginnis from "../avatar/avatar2.jpg";
 import mtsamis from "../avatar/avatar3.jpg";
 import zoshikanlu from "../avatar/avatar4.jpg";
+import { useState } from "react";
+import { handleSaveQuestion } from "../actions/questions";
+import { useNavigate } from "react-router-dom";
 
 function NewPoll({ authedUser }) {
+  const [optionOneText, setOptionOneText] = useState("");
+  const [optionTwoText, setOptionTwoText] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const newQuestion = {
+    optionOneText,
+    optionTwoText,
+    author: authedUser.id,
+  };
+
+  function handleSubmit() {
+    handleSaveQuestion(newQuestion)(dispatch);
+    navigate("/");
+  }
+
   return (
     <div>
       <NavBar />
@@ -21,16 +40,22 @@ function NewPoll({ authedUser }) {
             className="NewOption"
             type="text"
             placeholder="Option 1"
-            required
+            value={optionOneText}
+            onChange={(e) => setOptionOneText(e.target.value)}
           />
           <input
             className="NewOption"
             type="text"
             placeholder="Option 2"
-            required
+            value={optionTwoText}
+            onChange={(e) => setOptionTwoText(e.target.value)}
           />
+          {!optionOneText || !optionTwoText ? (
+            <button disabled>Submit</button>
+          ) : (
+            <button onClick={handleSubmit}>Submit</button>
+          )}
         </div>
-        <button>Submit</button>
       </div>
     </div>
   );

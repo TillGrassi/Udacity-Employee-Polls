@@ -24,7 +24,6 @@ function Leaderboard({ users, authedUser }) {
         .sort((a, b) => b.combined - a.combined)
     );
   }, [users, authedUser]);
-  console.log(getRanking);
 
   return (
     <div>

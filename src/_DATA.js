@@ -147,7 +147,7 @@ export function _getQuestions() {
   });
 }
 
-function formatQuestion({ optionOneText, optionTwoText, author }) {
+export function formatQuestion({ optionOneText, optionTwoText, author }) {
   return {
     id: generateUID(),
     timestamp: Date.now(),
@@ -186,7 +186,6 @@ export function _saveQuestion(question) {
 }
 
 export function _saveQuestionAnswer({ authedUser, qid, answer }) {
-  console.log("fired");
   return new Promise((resolve, reject) => {
     if (!authedUser || !qid || !answer) {
       reject("Please provide authedUser, qid, and answer");
@@ -203,7 +202,7 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
           },
         },
       };
-
+      console.log(questions);
       questions = {
         ...questions,
         [qid]: {

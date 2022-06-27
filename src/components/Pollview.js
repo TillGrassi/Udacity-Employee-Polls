@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { handleSaveQuestionAnswer } from "../actions/questions";
 import sarahedo from "../avatar/avatar1.jpg";
 import tylermcginnis from "../avatar/avatar2.jpg";
@@ -7,6 +7,7 @@ import mtsamis from "../avatar/avatar3.jpg";
 import zoshikanlu from "../avatar/avatar4.jpg";
 
 function Pollview({ question, authedUser }) {
+  const dispatch = useDispatch();
   const [chosenOption, setChosenOption] = useState({
     optionOne: "none",
     optionTwo: "none",
@@ -33,11 +34,16 @@ function Pollview({ question, authedUser }) {
     answer: "optionOne",
   };
   const saveAnswerOne = () => {
-    handleSaveQuestionAnswer(answerOne);
+    handleSaveQuestionAnswer(answerOne)(dispatch);
   };
 
+  const answerTwo = {
+    authedUser: authedUser.id,
+    qid: question.id,
+    answer: "optionTwo",
+  };
   const saveAnswerTwo = () => {
-    handleSaveQuestionAnswer(authedUser.id, question.id, "optionTwo");
+    handleSaveQuestionAnswer(answerTwo)(dispatch);
   };
 
   useEffect(() => {
@@ -47,7 +53,7 @@ function Pollview({ question, authedUser }) {
     if (question.optionTwo.votes.includes(authedUser.id)) {
       setChosenOption({ optionTwo: "chosen" });
     }
-  }, []);
+  }, [question]);
 
   return (
     <div>
@@ -106,8 +112,11 @@ function Pollview({ question, authedUser }) {
   );
 }
 
-const mapStateToProps = ({ authedUser }) => {
+const mapStateToProps = ({ authedUser, questions }) => {
   return {
+    questions: Object.keys(questions).map(function (key) {
+      return questions[key];
+    }),
     authedUser,
   };
 };

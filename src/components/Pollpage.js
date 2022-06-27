@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
 import NavBar from "./NavBar";
 import Pollview from "./Pollview";
+import NotFound from "./NotFound";
 
 function Pollpage({ questions }) {
   const location = useLocation();
@@ -11,8 +12,14 @@ function Pollpage({ questions }) {
   const [questionDataObj] = questionData;
   return (
     <div>
-      <NavBar />
-      {questionDataObj && <Pollview question={questionDataObj} />}
+      {questionDataObj ? (
+        <div>
+          <NavBar />
+          <Pollview question={questionDataObj} />
+        </div>
+      ) : (
+        <NotFound />
+      )}
     </div>
   );
 }

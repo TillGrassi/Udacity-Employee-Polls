@@ -125,7 +125,9 @@ tbody tr:hover {
 }
 
 .PollviewOptions {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 500px;
   border: 2px solid black;
   margin: 20px;
