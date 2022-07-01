@@ -28,7 +28,7 @@ function Leaderboard({ users, authedUser }) {
   return (
     <div>
       <NavBar />
-      <Table className="Table">
+      <Table data-testid="leaderboard" className="Table">
         <thead>
           <tr>
             <th>#</th>

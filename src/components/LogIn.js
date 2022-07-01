@@ -25,6 +25,7 @@ const Login = ({ users, dispatch }) => {
       {userPicked === "mtsamis" && <img src={mtsamis} />}
       {userPicked === "zoshikanlu" && <img src={zoshikanlu} />}
       <select
+        data-testid="selectUser"
         className="LoginForm"
         onChange={(e) => setUserPicked(e.target.value)}
         value={userPicked}
@@ -39,6 +40,7 @@ const Login = ({ users, dispatch }) => {
         ))}
       </select>
       <input
+        data-testid="password"
         type="password"
         placeholder="password"
         className="LoginForm"
