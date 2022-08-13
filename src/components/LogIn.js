@@ -39,13 +39,7 @@ const Login = ({ users, dispatch }) => {
           </option>
         ))}
       </select>
-      <input
-        data-testid="password"
-        type="password"
-        placeholder="password"
-        className="LoginForm"
-        required
-      />
+
       {userPicked === "none" ? (
         <button disabled className="LoginForm">
           Submit
