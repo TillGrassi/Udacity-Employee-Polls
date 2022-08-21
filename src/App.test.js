@@ -104,10 +104,8 @@ describe("login page works as expected", () => {
       </BrowserRouter>
     );
     const userSelector = component.getByTestId("selectUser");
-    const passwordInput = component.getByTestId("password");
     const submitButton = component.getByText("Submit");
     expect(userSelector).toBeInTheDocument();
-    expect(passwordInput).toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
   });
   it("renders the login page when logging out", () => {

@@ -14,7 +14,7 @@ function App(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(handleInitialData());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">
@@ -23,9 +23,9 @@ function App(props) {
       ) : (
         <Routes>
           <Route path="/" exact element={<Dashboard />} />
-          <Route path="/Leaderboard" element={<Leaderboard />} />
-          <Route path="/NewPoll" element={<NewPoll />} />
-          <Route path="/Poll/:id" exact element={<Pollpage />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/add" element={<NewPoll />} />
+          <Route path="/questions/:id" exact element={<Pollpage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       )}

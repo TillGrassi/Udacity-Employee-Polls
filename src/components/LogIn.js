@@ -1,29 +1,30 @@
 import { connect } from "react-redux";
 import { useState } from "react";
 import { setAuthedUser } from "../actions/authedUser";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import sarahedo from "../avatar/avatar1.jpg";
 import tylermcginnis from "../avatar/avatar2.jpg";
 import mtsamis from "../avatar/avatar3.jpg";
 import zoshikanlu from "../avatar/avatar4.jpg";
 
 const Login = ({ users, dispatch }) => {
+  const location = useLocation();
   const [userPicked, setUserPicked] = useState("none");
   const navigate = useNavigate();
   const handleLogIn = (e) => {
     e.preventDefault();
 
     dispatch(setAuthedUser(userPicked));
-    navigate("/");
+    navigate(location.pathname);
   };
 
   return (
     <form className="LogIn">
       <h1>Select the user:</h1>
-      {userPicked === "sarahedo" && <img src={sarahedo} />}
-      {userPicked === "tylermcginnis" && <img src={tylermcginnis} />}
-      {userPicked === "mtsamis" && <img src={mtsamis} />}
-      {userPicked === "zoshikanlu" && <img src={zoshikanlu} />}
+      {userPicked === "sarahedo" && <img src={sarahedo} alt="" />}
+      {userPicked === "tylermcginnis" && <img src={tylermcginnis} alt="" />}
+      {userPicked === "mtsamis" && <img src={mtsamis} alt="" />}
+      {userPicked === "zoshikanlu" && <img src={zoshikanlu} alt="" />}
       <select
         data-testid="selectUser"
         className="LoginForm"

@@ -7,16 +7,19 @@ import { Provider } from "react-redux";
 import reducer from "./reducers";
 import middleware from "./middleware";
 import { BrowserRouter } from "react-router-dom";
-import { saveState, loadState } from "./saveState";
+//import { saveState, loadState } from "./saveState";
 
-const persistedState = loadState();
-const store = createStore(reducer, persistedState, middleware);
+//const persistedState = loadState();
+const store = createStore(reducer, /*persistedState,*/ middleware);
 
-store.subscribe(() => {
+// I thought it was quite inconvenient to need to login every time you visit a new site via url.
+// Thats why i added a function to store the logged in user in your local storage.
+
+/*store.subscribe(() => {
   saveState({
     authedUser: store.getState().authedUser,
   });
-});
+});*/
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

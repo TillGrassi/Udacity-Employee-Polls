@@ -7,7 +7,7 @@ import NotFound from "./NotFound";
 function Pollpage({ questions }) {
   const location = useLocation();
   const questionData = questions.filter(
-    (q) => q.id === location.pathname.slice(6)
+    (q) => q.id === location.pathname.slice(11)
   );
   const [questionDataObj] = questionData;
   return (

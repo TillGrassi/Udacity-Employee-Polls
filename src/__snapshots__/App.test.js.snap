@@ -231,13 +231,6 @@ Object {
             Select...
           </option>
         </select>
-        <input
-          class="LoginForm"
-          data-testid="password"
-          placeholder="password"
-          required=""
-          type="password"
-        />
         <button
           class="LoginForm"
           disabled=""
@@ -265,13 +258,6 @@ Object {
           Select...
         </option>
       </select>
-      <input
-        class="LoginForm"
-        data-testid="password"
-        placeholder="password"
-        required=""
-        type="password"
-      />
       <button
         class="LoginForm"
         disabled=""
