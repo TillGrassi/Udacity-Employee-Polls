@@ -44,16 +44,16 @@ function Leaderboard({ users, authedUser }) {
                 <td>{getRanking.indexOf(user) + 1}</td>
                 <td>
                   {user.name === "Sarah Edo" && (
-                    <img src={sarahedo} className="NavAvatar" />
+                    <img src={sarahedo} alt="" className="NavAvatar" />
                   )}
                   {user.name === "Mike Tsamis" && (
-                    <img src={mtsamis} className="NavAvatar" />
+                    <img src={mtsamis} alt="" className="NavAvatar" />
                   )}
                   {user.name === "Tyler McGinnis" && (
-                    <img src={tylermcginnis} className="NavAvatar" />
+                    <img src={tylermcginnis} alt="" className="NavAvatar" />
                   )}
                   {user.name === "Zenobia Oshikanlu" && (
-                    <img src={zoshikanlu} className="NavAvatar" />
+                    <img src={zoshikanlu} alt="" className="NavAvatar" />
                   )}
                   {user.name}
                 </td>

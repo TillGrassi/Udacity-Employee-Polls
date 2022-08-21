@@ -19,12 +19,12 @@ function NavBar({ authedUser }) {
         </Link>
       </li>
       <li className="NavLeft">
-        <Link to="/Leaderboard" className="NavLink Link">
+        <Link to="/leaderboard" className="NavLink Link">
           LeaderBoard
         </Link>
       </li>
       <li className="NavLeft">
-        <Link to="/NewPoll" className="NavLink Link">
+        <Link to="/add" className="NavLink Link">
           New
         </Link>
       </li>
@@ -36,16 +36,16 @@ function NavBar({ authedUser }) {
       <li className="NavRight NavLink">{authedUser.id}</li>
       <li className="NavRight">
         {authedUser.id === "sarahedo" && (
-          <img src={sarahedo} className="NavAvatar" />
+          <img src={sarahedo} alt="" className="NavAvatar" />
         )}
         {authedUser.id === "tylermcginnis" && (
-          <img src={tylermcginnis} className="NavAvatar" />
+          <img src={tylermcginnis} alt="" className="NavAvatar" />
         )}
         {authedUser.id === "mtsamis" && (
-          <img src={mtsamis} className="NavAvatar" />
+          <img src={mtsamis} alt="" className="NavAvatar" />
         )}
         {authedUser.id === "zoshikanlu" && (
-          <img src={zoshikanlu} className="NavAvatar" />
+          <img src={zoshikanlu} alt="" className="NavAvatar" />
         )}
       </li>
     </ul>
